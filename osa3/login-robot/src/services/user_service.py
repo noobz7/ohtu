@@ -1,6 +1,6 @@
-from entities.user import User
-import re
 
+import re, sys, pdb
+from entities.user import User
 
 class UserInputError(Exception):
     pass
@@ -35,6 +35,7 @@ class UserService:
         return user
 
     def validate(self, username, password):
+        pdb.Pdb(stdout=sys.__stdout__).set_trace()
         if not username or not password:
             raise UserInputError("Username and password are required")
 
@@ -43,7 +44,7 @@ class UserService:
 
         if not re.fullmatch("[a-z]+", username):
             raise UserInputError("New username must only use chars a-z")
-    
+
         if len(password) < 8:
             raise UserInputError("New password is too short")
 
